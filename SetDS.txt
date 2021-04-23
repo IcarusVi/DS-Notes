@@ -1,0 +1,45 @@
+class Set {
+  constructor() {
+    // Dictionary will hold the items of our set
+    this.dictionary = {};
+    this.length = 0;
+  }
+
+  // This method will check for the presence of an element and return true or false
+  has(element) {
+    return this.dictionary[element] !== undefined;
+  }
+
+  // This method will return all the values in the set
+  values() {
+    return Object.values(this.dictionary);
+  }
+
+  // Only change code below this line
+  add(value){
+    const key = Object.keys(this.dictionary).find(key => this.dictionary[key] === value);
+    if(this.has(key)){
+      return false;
+    }
+    else{
+      let currLength = this.length;
+      this.dictionary[currLength] = value;
+      this.length++;
+      return true
+    }
+  }
+  remove(value){
+    const key = Object.keys(this.dictionary).find(key => this.dictionary[key] === value);
+    if(this.has(key)){
+      delete this.dictionary[key]
+      this.length--
+      return true;
+    }
+    return false
+  }
+  size(){
+    return this.length;
+  }
+
+  // Only change code above this line
+}
