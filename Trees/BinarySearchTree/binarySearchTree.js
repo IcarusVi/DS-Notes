@@ -7,7 +7,7 @@ class Node {
     }
 }
 
-class BinarySearchTree {
+export default class BinarySearchTree {
     constructor(value) {
         this.root = value ? new Node(value) : null
     }
@@ -17,17 +17,17 @@ class BinarySearchTree {
         let newNode = new Node(value)
 
         //if root is empty then we make the new node the parent node;
-        if(currNode === null){
+        if (currNode === null) {
             this.root = newNode;
             return undefined;
         }
 
 
 
-        while (currNode !== null){
+        while (currNode !== null) {
             //check if value of node to add is less than the currentNode
-            if(val < currNode.value){
-                if(currNode.left === null){
+            if (val < currNode.value) {
+                if (currNode.left === null) {
                     currNode.left = newNode;
                     return undefined
                 }
@@ -37,8 +37,8 @@ class BinarySearchTree {
                 }
             }
             //check if value of node to add is greater than the currentNode
-            else if(val > currNode.value){
-                if(currNode.right === null){
+            else if (val > currNode.value) {
+                if (currNode.right === null) {
                     currNode.right = newNode;
                     return undefined
                 }
@@ -47,7 +47,7 @@ class BinarySearchTree {
                     currNode = currNode.right;
                 }
             }
-            else{
+            else {
                 console.log('Value already exists within the tree')
                 return null;
             }
@@ -57,11 +57,11 @@ class BinarySearchTree {
     }
     //Method to add node recursively
     addNode = (value) => {
-        if(this.root === null){
+        if (this.root === null) {
             this.root = new Node(value)
         }
-        else{
-            this.recAddNode(this.root,value)
+        else {
+            this.recAddNode(this.root, value)
         }
 
     }
@@ -71,15 +71,15 @@ class BinarySearchTree {
 
         //If the the value of new node to add is less than the current node,
         //navigate to left subtree of that node
-        if(node.value === null){
+        if (node.value === null) {
             this.root = newNode;
             return undefined;
         }
 
 
 
-        if(value < node.value){
-            if(node.left === null){
+        if (value < node.value) {
+            if (node.left === null) {
                 node.left = newNode;
             }
             else {
@@ -89,13 +89,70 @@ class BinarySearchTree {
         }
         //value is greater than
         else {
-            if(node.right === null){
+            if (node.right === null) {
                 node.right = newNode;
             }
             else {
                 this.recAddNode(node.right, value)
             }
 
+        }
+
+    }
+
+    findMin = () => {
+        let currNode = this.root;
+
+        //if tree is empty return null
+        if (currNode === null) {
+            console.log('empty tree')
+            return null
+        }
+        else {
+            //loop to travel down the left subtree and it's nodes
+            while (currNode.left !== null) {
+                //compares current value of node to the one left of it
+                if (currNode.value > currNode.left.value) {
+                    currNode = currNode.left;
+                }
+                else {
+                    return currNode.value;
+                }
+            }
+            return currNode.value;
+        }
+    }
+
+    findMax = () => {
+        let currNode = this.root;
+
+        //if tree is empty return null
+        if (currNode === null) {
+            console.log('empty tree')
+            return null
+        }
+        else {
+            //loop to travel down the right subtree and it's nodes
+            while (currNode.right !== null) {
+                 //compares current value of node to the one right of it
+                if (currNode.value < currNode.right.value) {
+                    currNode = currNode.right;
+                }
+                else {
+                    return currNode.value;
+                }
+            }
+            return currNode.value;
+        }
+    }
+
+    //Now a method to find min and max recursively
+    recFindMax = (root) => {
+        if(root.right === null){
+            return root.value;
+        }
+        else{
+            this.recFindMax(root.right)
         }
 
     }
