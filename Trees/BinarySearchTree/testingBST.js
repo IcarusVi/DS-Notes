@@ -10,3 +10,4 @@ bst.addNode(54)
 bst.addNode(12)
 
 console.log(bst)
+console.log(bst.recFindMax())

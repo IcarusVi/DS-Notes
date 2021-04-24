@@ -147,12 +147,12 @@ export default class BinarySearchTree {
     }
 
     //Now a method to find min and max recursively
-    recFindMax = (root) => {
+    recFindMax = (root = this.root) => {
         if(root.right === null){
             return root.value;
         }
         else{
-            this.recFindMax(root.right)
+            return this.recFindMax(root.right)
         }
 
     }
