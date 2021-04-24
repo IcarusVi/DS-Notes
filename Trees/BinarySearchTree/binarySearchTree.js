@@ -157,4 +157,13 @@ export default class BinarySearchTree {
 
     }
 
+    recFindMin = (root = this.root) => {
+        if(root.left === null){
+            return root.value;
+        }
+        else{
+            return this.recFindMin(root.left)
+        }
+    }
+
 }
