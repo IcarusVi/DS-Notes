@@ -134,7 +134,7 @@ export default class BinarySearchTree {
         else {
             //loop to travel down the right subtree and it's nodes
             while (currNode.right !== null) {
-                 //compares current value of node to the one right of it
+                //compares current value of node to the one right of it
                 if (currNode.value < currNode.right.value) {
                     currNode = currNode.right;
                 }
@@ -148,21 +148,64 @@ export default class BinarySearchTree {
 
     //Now a method to find min and max recursively
     recFindMax = (root = this.root) => {
-        if(root.right === null){
+        if (root.right === null) {
             return root.value;
         }
-        else{
+        else {
             return this.recFindMax(root.right)
         }
 
     }
 
     recFindMin = (root = this.root) => {
-        if(root.left === null){
+        if (root.left === null) {
             return root.value;
         }
-        else{
+        else {
             return this.recFindMin(root.left)
+        }
+    }
+
+    //checks if element is present in a bst
+    isPresent = (value) => {
+        if (this.root === null) {
+            return false
+        }
+        else {
+            let currNode = this.root;
+            //While currNode isn't null search the tree for the value
+            while (currNode) {
+                if (currNode.value === value) {
+                    return true
+                }
+                else if (currNode.value < value) {
+                    currNode = currNode.right;
+                }
+                else if (currNode.value > value) {
+                    currNode = currNode.left;
+                }
+
+            }
+            return false
+        }
+
+    }
+    recIsPresent = (value, root = this.root) => {
+        if (root === null) {
+            return false;
+        }
+        else {
+            let currNode = root;
+
+            if (currNode.value < value) {
+                return this.recIsPresent(value, currNode.right)
+            }
+            else if (currNode.value > value) {
+                return this.recIsPresent(value, currNode.left)
+            }
+            else {
+                return true;
+            }
         }
     }
 
